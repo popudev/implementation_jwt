@@ -13,10 +13,10 @@ const UserController = {
 
   deleteUser: async (req, res) => {
     try {
-      const result = await User.deleteOne({ _id: req.params.id });
+      const result = await User.find({ _id: req.params.id });
 
-      if (result.deletedCount) {
-        res.status(200).json(result);
+      if (result) {
+        res.status(200).json('Delete successfully');
       } else {
         res.status(404).json({
           mess: 'Not Found User !!!',

@@ -2,6 +2,7 @@ const initState = {
   allUsers: [],
   isFetching: false,
   error: false,
+  messenger: '',
 };
 
 const userReducer = (state = initState, action) => {
@@ -22,6 +23,24 @@ const userReducer = (state = initState, action) => {
         ...state,
         isFetching: false,
         error: true,
+      };
+    case 'deleteUserStart':
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case 'deleteUserSuccess':
+      return {
+        ...state,
+        isFetching: false,
+        messenger: action.payload,
+      };
+    case 'deleteUserFailed':
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+        messenger: action.payload,
       };
     default:
       return state;

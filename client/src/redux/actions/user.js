@@ -16,3 +16,23 @@ export const getUsersFailed = () => {
     type: 'getUsersFailed',
   };
 };
+
+export const deleteUserStart = () => {
+  return {
+    type: 'deleteUserStart',
+  };
+};
+
+export const deleteUserSuccess = (payload) => {
+  return {
+    type: 'deleteUserSuccess',
+    payload,
+  };
+};
+
+export const deleteUserFailed = (payload) => {
+  return {
+    type: 'deleteUserFailed',
+    payload,
+  };
+};

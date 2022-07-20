@@ -64,6 +64,7 @@ const AuthenController = {
           secure: false,
           path: '/',
           sameSite: 'strict',
+          expires: new Date(Date.now() + 900000),
         });
 
         const { password, ...others } = user._doc;
@@ -82,12 +83,12 @@ const AuthenController = {
     }
   },
 
-  requestRefreshToken: (req, res) => {
+  requestRefreshToken: async (req, res) => {
     if (!req.cookies.refreshToken) return res.status(401).json("You're not authenticated");
 
     jwt.verify(req.cookies.refreshToken, process.env.JWT_ACCESS_KEY, (err, user) => {
       if (err) {
-        res.status(403).json('Token is not valid');
+        return res.status(403).json('Token is not valid');
       }
 
       const newAccessToken = AuthenController.genarateAccessToken(user);
