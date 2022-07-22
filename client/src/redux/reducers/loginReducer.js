@@ -24,6 +24,25 @@ const loginReducer = (state = initState, action) => {
         isFetching: false,
         error: true,
       };
+    case 'logoutStart':
+      return {
+        ...state,
+        isFetching: true,
+        error: false,
+      };
+
+    case 'logoutSuccess':
+      return {
+        ...state,
+        isFetching: false,
+        currentUser: null,
+      };
+    case 'logoutFailed':
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+      };
     default:
       return state;
   }

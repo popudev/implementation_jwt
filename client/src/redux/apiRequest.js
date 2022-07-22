@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { loginStart, loginSuccess, loginFailed } from './actions/login';
+import { logoutFailed, logoutStart, logoutSuccess } from './actions/logout';
 import { registerStart, registerSuccess, registerFailed } from './actions/register';
 import {
   getUsersStart,
@@ -67,5 +68,18 @@ export const refeshToken = async () => {
     });
   } catch (err) {
     return false;
+  }
+};
+
+export const logoutUser = async (dispatch, navigator) => {
+  dispatch(logoutStart());
+  try {
+    await axios.get('/auth/logout', {
+      withCredentials: true,
+    });
+    dispatch(logoutSuccess());
+    navigator('/login');
+  } catch (err) {
+    dispatch(logoutFailed());
   }
 };
